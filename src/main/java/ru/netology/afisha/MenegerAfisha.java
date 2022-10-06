@@ -1,47 +1,45 @@
 package ru.netology.afisha;
 
-import lombok.Data;
-
-@Data
-
 public class MenegerAfisha {
-    private Afisha[] films = new Afisha[0];
-    private int defaultFilmsLength = 10;
+    private String[] films = new String[0];
+    private int defaultFilmsLength;
 
 
-    MenegerAfisha() {
-
+    public MenegerAfisha() {
+        this.defaultFilmsLength = 10;
     }
 
-    public MenegerAfisha(int customFilmsLength) {
-        if (customFilmsLength > 0) {
-            defaultFilmsLength = customFilmsLength;
-        }
+
+    public MenegerAfisha(int defaultFilmsLength) {
+        this.defaultFilmsLength = defaultFilmsLength;
     }
 
-    public Afisha[] findAll() {
+
+    public String[] findAll() {
         return films;
     }
 
-    public void addFilms(Afisha film) {
-        int length = films.length + 1;
-        Afisha[] movie = new Afisha[length];
-        System.arraycopy(films, 0, movie, 0, films.length);
-        int lastFilm = movie.length - 1;
-        movie[lastFilm] = film;
-        films = movie;
+    public void addFilms(String film) {
+        String[] tmp = new String[films.length + 1];
+        for (int i = 0; i < films.length; i++) {
+            tmp[i] = films[i];
+        }
+        tmp[tmp.length - 1] = film;
+        films = tmp;
     }
 
-    public Afisha[] getfilms() {
+    public String[] getfilms() {
         return films;
     }
 
-    public Afisha[] findLast() {
-        int moviesLength = films.length;
-        if (moviesLength < defaultFilmsLength) {
-            defaultFilmsLength = moviesLength;
+    public String[] findLast() {
+        int moviesLength;
+        if (films.length < defaultFilmsLength) {
+            moviesLength = films.length;
+        } else {
+            moviesLength = defaultFilmsLength;
         }
-        Afisha[] customFilm = new Afisha[defaultFilmsLength];
+        String[] customFilm = new String[defaultFilmsLength];
         for (int i = 0; i < customFilm.length; i++) {
             int result = moviesLength - i - 1;
             customFilm[i] = films[result];
